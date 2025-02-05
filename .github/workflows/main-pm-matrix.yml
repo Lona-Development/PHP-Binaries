@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       pm-version-major:
-        description: 'PocketMine-MP major version'
+        description: 'LonaDB major version'
         required: true
         type: number
       php-version-base:
@@ -81,16 +81,16 @@ jobs:
       
       - name: Create tarball
         run: |
-          tar -czf ./PHP-${{ inputs.php-version-base }}-Android-arm64-PM${{ inputs.pm-version-major }}.tar.gz bin
-          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-Android-arm64-PM${{ inputs.pm-version-major }}-debugging-symbols.tar.gz bin-debug
+          tar -czf ./PHP-${{ inputs.php-version-base }}-Android-arm64.tar.gz bin
+          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-Android-arm64-debugging-symbols.tar.gz bin-debug
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: PHP-${{ inputs.php-version-base }}-Android-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-Android
           path: |
-            ./*PHP-${{ inputs.php-version-base }}-Android-arm64-PM${{ inputs.pm-version-major }}*.tar.gz
+            ./*PHP-${{ inputs.php-version-base }}-Android-arm64*.tar.gz
             install.log
             compile.sh
           if-no-files-found: error
@@ -103,7 +103,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: PHP-${{ inputs.php-version-base }}-Android-workspace-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-Android-workspace
           path: |
             workspace.tar.gz
           if-no-files-found: error
@@ -137,16 +137,16 @@ jobs:
 
       - name: Create tarball
         run: |
-          tar -czf ./PHP-${{ inputs.php-version-base }}-Linux-x86_64-PM${{ inputs.pm-version-major }}.tar.gz bin
-          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-Linux-x86_64-PM${{ inputs.pm-version-major }}-debugging-symbols.tar.gz bin-debug
+          tar -czf ./PHP-${{ inputs.php-version-base }}-Linux-x86_64.tar.gz bin
+          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-Linux-x86_64-debugging-symbols.tar.gz bin-debug
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: PHP-${{ inputs.php-version-base }}-Linux-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-Linux
           path: |
-            ./*PHP-${{ inputs.php-version-base }}-Linux-x86_64-PM${{ inputs.pm-version-major }}*.tar.gz
+            ./*PHP-${{ inputs.php-version-base }}-Linux-x86_64*.tar.gz
             install.log
             compile.sh
           if-no-files-found: error
@@ -159,7 +159,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: PHP-${{ inputs.php-version-base }}-Linux-workspace-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-Linux-workspace
           path: |
             workspace.tar.gz
           if-no-files-found: error
@@ -203,16 +203,16 @@ jobs:
           
       - name: Create tarball
         run: |
-          tar -czf ./PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-PM${{ inputs.pm-version-major }}.tar.gz bin
-          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-PM${{ inputs.pm-version-major }}-debugging-symbols.tar.gz bin-debug
+          tar -czf ./PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}.tar.gz bin
+          tar -czf ./Z-PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-debugging-symbols.tar.gz bin-debug
         
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}
           path: |
-            ./*PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name}}-PM${{ inputs.pm-version-major }}*.tar.gz
+            ./*PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name}}*.tar.gz
             install.log
             compile.sh
           if-no-files-found: error
@@ -225,7 +225,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-workspace-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-MacOS-${{ matrix.artifact-name }}-workspace
           path: |
             workspace.tar.gz
           if-no-files-found: error
@@ -255,17 +255,17 @@ jobs:
       - name: Prepare artifacts
         run: |
           mkdir temp
-          Compress-Archive -Path .\bin -DestinationPath "PHP-${{ inputs.php-version-base }}-Windows-x64-PM${{ inputs.pm-version-major }}.zip"
-          move php-debug-pack-*.zip temp/Z-PHP-${{ inputs.php-version-base }}-Windows-x64-PM${{ inputs.pm-version-major }}-debugging-symbols.zip
+          Compress-Archive -Path .\bin -DestinationPath "PHP-${{ inputs.php-version-base }}-Windows-x64.zip"
+          move php-debug-pack-*.zip temp/Z-PHP-${{ inputs.php-version-base }}-Windows-x64-debugging-symbols.zip
           move temp\*.zip .
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: PHP-${{ inputs.php-version-base }}-Windows-PM${{ inputs.pm-version-major }}
+          name: PHP-${{ inputs.php-version-base }}-Windows
           path: |
-            *PHP-${{ inputs.php-version-base }}-Windows-x64-PM${{ inputs.pm-version-major }}*.zip
+            *PHP-${{ inputs.php-version-base }}-Windows-x64*.zip
             compile.log
             windows-compile-vs.bat
           if-no-files-found: error
@@ -310,22 +310,22 @@ jobs:
 
       - name: Generate release notes
         run: |
-          echo "### PHP ${{ inputs.php-version-base }} for PocketMine-MP ${{ inputs.pm-version-major }}.x" > changelog.md
+          echo "### PHP ${{ inputs.php-version-base }} for LonaDB" > changelog.md
           echo "Last updated on **$(date -u +'%d %b %Y at %H:%M:%S %Z')**" >> changelog.md
           echo -e "\n\n" >> changelog.md
           echo "Built by: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> changelog.md
           echo "Build number: ${{ github.run_number }}" >> changelog.md
           echo -e "\n\n\n" >> changelog.md
-          echo ":information_source: **Linux/MacOS users**: Please see [this page](https://doc.pmmp.io/en/rtfd/faq/installation/opcache.so.html) to fix extension loading errors. Also, check out the [PocketMine-MP Linux/MacOS installer](https://doc.pmmp.io/en/rtfd/installation/get-dot-pmmp-dot-io.html)." >> changelog.md
+          echo ":information_source: **Linux/MacOS users**: Please see [this page](https://doc.pmmp.io/en/rtfd/faq/installation/opcache.so.html) to fix extension loading errors." >> changelog.md
           echo ":warning: **Windows users**: Don't forget to install [Visual C++ Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe) or the binary will not work!" >> changelog.md
           echo -e "\n\n\n" >> changelog.md
 
           if [[ "${{ inputs.special-release }}" != "none" ]]; then
-            echo ":white_check_mark: At the time of publication, this version is recommended for PocketMine-MP ${{ inputs.pm-version-major }}.x production servers." >> changelog.md
+            echo ":white_check_mark: At the time of publication, this version is recommended for LonaDB production servers." >> changelog.md
           else
             echo ":warning: WARNING! :warning:" >> changelog.md
-            echo "At the time of publication, plugins for PocketMine-MP ${{ inputs.pm-version-major }}.x may not work this PHP version." >> changelog.md
-            echo "If you have problems, try the [recommended PM${{ inputs.pm-version-major }} release](${{ github.server_url }}/${{ github.repository }}/releases/pm${{ inputs.pm-version-major }}-latest) instead." >> changelog.md
+            echo "At the time of publication, LonaDB may not work this PHP version." >> changelog.md
+            echo "If you have problems, try the [recommended release](${{ github.server_url }}/${{ github.repository }}/releases/latest) instead." >> changelog.md
           fi
 
       - name: Get date
@@ -333,13 +333,13 @@ jobs:
         run: |
           echo DATE=$(date -u +'%d %b %Y') >> $GITHUB_OUTPUT
 
-      - name: Update recommended PM release
+      - name: Update recommended release
         uses: ncipollo/release-action@v1.15.0
         if: ${{ inputs.special-release != 'none' }}
         with:
           artifacts: |
-            ${{ github.workspace }}/*PHP-*-PM*/*.tar.gz
-            ${{ github.workspace }}/*PHP-*-Windows-PM*/*.zip
+            ${{ github.workspace }}/*PHP-*/*.tar.gz
+            ${{ github.workspace }}/*PHP-*-Windows*/*.zip
             ${{ github.workspace }}/*.gdbinit
           name: PM ${{ inputs.pm-version-major }}.x (${{ steps.date.outputs.DATE }}) - Recommended
           tag: pm${{ inputs.pm-version-major }}-latest
@@ -350,12 +350,12 @@ jobs:
           makeLatest: ${{ inputs.special-release == 'default-latest' }}
           prerelease: ${{ inputs.pm-preview == 'true' }}
 
-      - name: Update php-version PM release
+      - name: Update php-version release
         uses: ncipollo/release-action@v1.15.0
         with:
           artifacts: |
-            ${{ github.workspace }}/*PHP-*-PM*/*.tar.gz
-            ${{ github.workspace }}/*PHP-*-Windows-PM*/*.zip
+            ${{ github.workspace }}/*PHP-*/*.tar.gz
+            ${{ github.workspace }}/*PHP-*-Windows*/*.zip
             ${{ github.workspace }}/*.gdbinit
           name: PM ${{ inputs.pm-version-major }}.x (${{ steps.date.outputs.DATE }}) - PHP ${{ inputs.php-version-base }}
           tag: pm${{ inputs.pm-version-major }}-php-${{ inputs.php-version-base }}-latest
