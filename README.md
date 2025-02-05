@@ -1,18 +1,16 @@
-# PHP binaries & PHP build scripts for PocketMine-MP
-[![Build status](https://github.com/pmmp/php-build-scripts/actions/workflows/main.yml/badge.svg)](https://github.com/pmmp/php-build-scripts/actions/workflows/main.yml)
+# PHP binaries & PHP build scripts for LonaDB
+[![Build and publish PHP binaries](https://github.com/Lona-Development/PHP-Binaries/actions/workflows/main.yml/badge.svg)](https://github.com/Lona-Development/PHP-Binaries/actions/workflows/main.yml)
 
 ## Prebuilt binaries
 ### Actively updated "latest" URLs
-- [PM5 default](https://github.com/pmmp/PHP-Binaries/releases/tag/pm5-latest)
-- [PM5 PHP 8.2](https://github.com/pmmp/PHP-Binaries/releases/tag/pm5-php-8.2-latest) (default for PM 5.10+)
-- [PM5 PHP 8.3](https://github.com/pmmp/PHP-Binaries/releases/tag/pm5-php-8.3-latest) (not officially supported, but works in PM 5.9+)
+- [Default](https://github.com/pmmp/PHP-Binaries/releases/tag/latest)
+- [PHP 8.2](https://github.com/pmmp/PHP-Binaries/releases/tag/php-8.2-latest)
+- [PHP 8.3](https://github.com/pmmp/PHP-Binaries/releases/tag/php-8.3-latest) (not officially supported by Lona-Development)
 
-### Legacy binaries, no longer updated
-- [PM4 PHP 8.0](https://github.com/pmmp/PHP-Binaries/releases/tag/pm4-php-8.0-latest) (default for PM 4.0+)
-- [PM4 PHP 8.1](https://github.com/pmmp/PHP-Binaries/releases/tag/pm4-php-8.1-latest) (default for PM 4.21+)
-- [PM4 PHP 8.2](https://github.com/pmmp/PHP-Binaries/releases/tag/pm4-php-8.2-latest) (never officially supported, but works in PM 4.12+)
-- [PM5 PHP 8.0](https://github.com/pmmp/PHP-Binaries/releases/tag/pm5-php-8.0-latest) (default for PM 5.0 alpha)
-- [PM5 PHP 8.1](https://github.com/pmmp/PHP-Binaries/releases/tag/pm5-php-8.1-latest) (default for PM 5.0+)
+## Disclaimer
+- This script has been created by the PocketMine-MP Team and is used by Lona-Development because it's the best available option with ZTS (Zend Thread Safety) support.
+- The binaries built by this script include the `ext-pmmpthread` extension, a fork of `pthread` that is compatible with PHP 8.2 and later, created by the PocketMine-MP Team.
+- Compiling yourself is not recommended unless you know what you're doing. If any issues arise, please use the prebuilt binaries.
 
 ## compile.sh
 

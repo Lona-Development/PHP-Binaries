@@ -31,8 +31,8 @@ $PHP_ENCODING_VER="0.4.0"
 function pm-echo {
     param ([string] $message)
 
-    echo "[PocketMine] $message"
-    echo "[PocketMine] $message" >> "$log_file"
+    echo "[LonaDB] $message"
+    echo "[LonaDB] $message" >> "$log_file"
 }
 
 function pm-echo-error {
@@ -152,17 +152,17 @@ function php-version-id {
 $PREFERRED_PHP_VERSION_BASE=""
 switch ($env:PM_VERSION_MAJOR) {
     5 { $PREFERRED_PHP_VERSION_BASE="8.2" }
-    $null { pm-fatal-error "Please specify PocketMine-MP major version by setting the PM_VERSION_MAJOR environment variable" }
-    default { pm-fatal-error "PocketMine-MP $PM_VERSION_MAJOR is not supported by this version of the build script" }
+    $null { pm-fatal-error "Please specify LonaDB major version by setting the PM_VERSION_MAJOR environment variable" }
+    default { pm-fatal-error "LonaDB $PM_VERSION_MAJOR is not supported by this version of the build script" }
 }
 
 $PM_VERSION_MAJOR=$env:PM_VERSION_MAJOR
-pm-echo "Compiling with configuration for PocketMine-MP $PM_VERSION_MAJOR"
+pm-echo "Compiling with configuration for LonaDB $PM_VERSION_MAJOR"
 
 if ($PHP_VERSION_BASE -eq "auto") {
     $PHP_VERSION_BASE=$PREFERRED_PHP_VERSION_BASE
 } elseif ($PHP_VERSION_BASE -ne $PREFERRED_PHP_VERSION_BASE) {
-    pm-echo "[WARNING] $PHP_VERSION_BASE is not the default for PocketMine-MP $PM_VERSION_MAJOR"
+    pm-echo "[WARNING] $PHP_VERSION_BASE is not the default for LonaDB $PM_VERSION_MAJOR"
     pm-echo "[WARNING] The build may fail, or you may not be able to use the resulting PHP binary"
 }
 
@@ -576,7 +576,7 @@ write-status "generating php.ini"
 $php_ini="$outpath\bin\php\php.ini"
 
 #all this work to make PS output utf-8/ascii instead of utf-16 :(
-Out-File -FilePath $php_ini -Encoding ascii -InputObject ";Custom PocketMine-MP php.ini file"
+Out-File -FilePath $php_ini -Encoding ascii -InputObject ";Custom LonaDB php.ini file"
 append-file-utf8 "memory_limit=1024M" $php_ini
 append-file-utf8 "display_errors=1" $php_ini
 append-file-utf8 "display_startup_errors=1" $php_ini

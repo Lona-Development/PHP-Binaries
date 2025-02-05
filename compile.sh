@@ -78,7 +78,7 @@ function mark_cache {
 	touch "./.compile.sh.cache"
 }
 
-write_out "PocketMine" "PHP compiler for Linux, MacOS and Android"
+write_out "LonaDB" "PHP compiler for Linux, MacOS and Android" "Made by PocketMine-MP Team, special thanks"
 DIR="$(pwd)"
 BASE_BUILD_DIR="$DIR/install_data"
 #libtool and autoconf have a "feature" where it looks for install.sh/install-sh in ./ ../ and ../../
@@ -261,22 +261,22 @@ case $PM_VERSION_MAJOR in
 		PREFERRED_PHP_VERSION_BASE="8.2"
 		;;
 	"")
-		write_error "Please specify PocketMine-MP major version target with -P (e.g. -P5)"
+		write_error "Please specify LonaDB major version target with -P (e.g. -P5)"
 		exit 1
 		;;
 	\?)
-		write_error "PocketMine-MP $PM_VERSION_MAJOR is not supported by this version of the build script"
+		write_error "LonaDB $PM_VERSION_MAJOR is not supported by this version of the build script"
 		exit 1
 		;;
 esac
 
-write_out "opt" "Compiling with configuration for PocketMine-MP $PM_VERSION_MAJOR"
+write_out "opt" "Compiling with configuration for LonaDB $PM_VERSION_MAJOR"
 
 if [ "$PHP_VERSION_BASE" == "auto" ]; then
 	PHP_VERSION_BASE="$PREFERRED_PHP_VERSION_BASE"
 elif [ "$PHP_VERSION_BASE" != "$PREFERRED_PHP_VERSION_BASE" ]; then
 	#TODO: validate that this PHP version is able to be used
-	write_out "WARNING" "$PHP_VERSION_BASE is not the default for PocketMine-MP $PM_VERSION_MAJOR"
+	write_out "WARNING" "$PHP_VERSION_BASE is not the default for LonaDB $PM_VERSION_MAJOR"
 	write_out "WARNING" "The build may fail, or you may not be able to use the resulting PHP binary"
 fi
 
@@ -434,7 +434,7 @@ else
 			fi
 			GMP_ABI="64"
 		else
-			write_out "ERROR" "PocketMine-MP is no longer supported on 32-bit systems"
+			write_out "ERROR" "LonaDB is not supported on 32-bit systems"
 			exit 1
 		fi
 	fi
@@ -1412,5 +1412,5 @@ if [ "$DO_CLEANUP" == "yes" ]; then
 fi
 
 date >> "$DIR/install.log" 2>&1
-write_out "PocketMine" "You should start the server now using \"./start.sh\"."
-write_out "PocketMine" "If it doesn't work, please send the \"install.log\" file to the Bug Tracker."
+write_out "LonaDB" "You should start the server now using \"./start.sh\"."
+write_out "LonaDB" "If it doesn't work, please send the \"install.log\" file to the Bug Tracker."
