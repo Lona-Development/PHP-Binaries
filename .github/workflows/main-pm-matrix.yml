@@ -284,18 +284,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up authentication
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+        run: echo "Using custom token for authentication"
+
       - name: Update latest tag target
         run: |
-          git tag -f pm${{ inputs.pm-version-major }}-php-${{ inputs.php-version-base }}-latest
-          git push -f origin pm${{ inputs.pm-version-major }}-php-${{ inputs.php-version-base }}-latest
-          git tag -f pm${{ inputs.pm-version-major }}-latest
-          git push -f origin pm${{ inputs.pm-version-major }}-latest
+          git tag -f php-${{ inputs.php-version-base }}-latest
+          git push -f origin php-${{ inputs.php-version-base }}-latest
+          git tag -f latest
+          git push -f origin latest
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: ${{ github.workspace }}
-          pattern: "*PHP-${{ inputs.php-version-base }}-*-PM${{ inputs.pm-version-major }}"
+          pattern: "*PHP-${{ inputs.php-version-base }}*"
 
       - name: Download .gdbinit for this PHP version
         run: |
